@@ -22,6 +22,8 @@
  *              $ref: '#/components/schemas/ErrorMessage'
  */
 
+import getNotificationModel from "../models/notifications.js";
+
 const healthcheck = (req, res) => {
     try {
         res.status(200).json({ message: "OK" });
@@ -72,9 +74,9 @@ const tenantHealthcheck = async (req, res) => {
             res.status(400).json({ message: "Tenant is required" });
             return;
         }
-        const OrderModel = await (tenant);
+        const NotificationModel = await getNotificationModel(tenant);
         // Check if the model is connected to the database
-        await OrderModel.estimatedDocumentCount();
+        await NotificationModel.estimatedDocumentCount();
         // If the model is connected, return OK
         res.status(200).json({ message: "OK" });
     } catch (error) {

@@ -1,23 +1,23 @@
 services:
   node-api:
-    container_name: orders-app
+    container_name: notifications-app
     ports:
       - "3000:3000"
-    image: orders-server
+    image: notifications-server
     build: ./
     networks:
-      - orders-network
+      - notifications-network
     environment:
       - NODE_ENV=test
-      - MONGODB_URI=mongodb://orders-mongo-db:27017
+      - MONGODB_URI=mongodb://notifications-mongo-db:27017
   mongo-db:
     image: mongo
-    container_name: orders-mongo-db
+    container_name: notifications-mongo-db
     ports:
       - "27017:27017"
     networks:
-      - orders-network
+      - notifications-network
 networks:
-  orders-network:
-    name: orders-network
+  notifications-network:
+    name: notifications-network
     driver: bridge
